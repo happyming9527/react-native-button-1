@@ -52,13 +52,19 @@ var Button = React.createClass({
       disabled ? this.props.styleDisabled : null,
     ];
 
-    var children = coalesceNonElementChildren(this.props.children, (children, index) => {
-      return (
-        <Text key={index} style={style}>
-          {children}
-        </Text>
-      );
-    });
+    var children;
+    if (this.props.child) {
+      children = this.props.child
+    } else {
+      children = coalesceNonElementChildren(this.props.children, (children, index) => {
+        return (
+          <Text key={index} style={style}>
+            {children}
+          </Text>
+        );
+      });
+    }
+
 
     switch (children.length) {
       case 0:
